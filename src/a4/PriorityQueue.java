@@ -38,6 +38,7 @@ public class PriorityQueue implements  Queue{
                 heapStructure = true;
             }
         }
+        size++;
     }
     private void swap(int val1, int val2){
         Prioritized temp = heap[val1];
@@ -85,6 +86,7 @@ public class PriorityQueue implements  Queue{
                 heapStructure = true;
             }
         }
+        size--;
         return value;
     }
 
@@ -95,11 +97,7 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public int size() {
-        int i = 0;
-        while (heap[i+1] != null){
-            i++;
-        }
-        return i;
+        return size;
     }
 
     @Override
@@ -109,7 +107,30 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public double[] sort() {
-        return new double[0];
+        boolean[] flag = new boolean[size];
+        double[] sortedValues = new double[size];
+
+        for (int i = 0; i < size; i++) {
+            sortedValues[i] = getMin(flag);
+        }
+        return sortedValues;
+    }
+    private double getMin(boolean[] flag){
+        int i = 0;
+        int minIndex = 0;
+        while (flag[i]){
+            i++;
+        }
+        double currMin = heap[i + 1].getValue();
+
+        for (int j = 0; j < size; size++){
+            if (!flag[j] && heap[j + 1].getValue() < currMin){
+                currMin = heap[j + 1].getValue();
+                minIndex = j;
+            }
+        }
+        flag[minIndex] = true;
+        return currMin;
     }
 
     @Override
