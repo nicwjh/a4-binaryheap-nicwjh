@@ -122,6 +122,7 @@ public class PriorityQueue implements  Queue{
         while (flag[minIndex]){
             minIndex++;
         }
+
         for (int j = 1; j <= size; j++){
             if (!flag[j] && heap[j].getPriority() < heap[minIndex].getPriority()){
                 minIndex = j;
@@ -135,7 +136,20 @@ public class PriorityQueue implements  Queue{
     }
 
     @Override
-    public void build(Prioritized[] elements) { }
+    public void build(Prioritized[] elements) {
+        int i = 1;
+        //increment i to index of last leaf
+        while (elements[i + 1] != null){
+            i++;
+        }
+        while (i > 1) {
+            if (elements[i].getPriority() > elements[i / 2].getPriority()) {
+                swap(i, i / 2);
+            }
+            i -= 2;
+        }
+        heap = elements;
+    }
 
 
     // do not change
