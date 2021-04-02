@@ -160,15 +160,19 @@ public class PriorityQueue implements  Queue{
                     swapIndex = i - 1;
                 }
             }
-            /*
+
             if (elements[swapIndex].getPriority() > elements[swapIndex / 2].getPriority()) {
-                swap(swapIndex, swapIndex / 2);
+                buildSwap(swapIndex, swapIndex / 2, elements);
             }
 
-             */
             i -= 2;
         }
         heap = elements;
+    }
+    private void buildSwap(int index1, int index2, Prioritized[] array1){
+        Prioritized temp = array1[index1];
+        array1[index1] = array1[index2];
+        array1[index2] = temp;
     }
 
 
