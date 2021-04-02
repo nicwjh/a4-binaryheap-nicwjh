@@ -139,7 +139,7 @@ public class PriorityQueue implements  Queue{
     public void build(Prioritized[] elements) {
         int i = elements.length - 1;
 
-        while (i > 1) {
+        while (i > 0) {
             int swapIndex = i;
             if (i % 2 == 0) { //left leaf
                 if (i != elements.length - 1 && elements[i + 1].getPriority() > elements[i].getPriority()) {
