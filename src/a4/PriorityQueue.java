@@ -20,7 +20,29 @@ public class PriorityQueue implements  Queue{
     // of the method signatures
     @Override
     public void enqueue(double value, double priority) {
-        // test push
+        int i = 1;
+        boolean heapStructure = false;
+        Prioritized newObject = new Prioritized(value, priority);
+        while (heap[i] != null){
+            i++;
+        }
+        heap[i] = newObject;
+
+        while (!heapStructure){
+            int parentIndex = i/2;
+            if (heap[i].getPriority() > heap[parentIndex].getPriority()){
+                enqueue_swap(heap[i], heap[parentIndex]);
+                i = parentIndex;
+            }
+            else{
+                heapStructure = true;
+            }
+        }
+    }
+    private void enqueue_swap(Prioritized val1, Prioritized val2){
+        Prioritized temp = val1;
+        val1 = val2;
+        val2 = temp;
     }
 
     @Override
