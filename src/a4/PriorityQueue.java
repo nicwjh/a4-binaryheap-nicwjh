@@ -150,7 +150,7 @@ public class PriorityQueue implements  Queue{
         while (i > 1) {
             int swapIndex = i;
             if (i % 2 == 0) { //left leaf
-                if (elements[i + 1] != null && elements[i + 1].getPriority() > elements[i].getPriority()) {
+                if (i != elements.length && elements[i + 1].getPriority() > elements[i].getPriority()) {
                     swapIndex = i + 1;
                 }
 
@@ -160,11 +160,9 @@ public class PriorityQueue implements  Queue{
                     swapIndex = i - 1;
                 }
             }
-            /*
-            if (elements[swapIndex].getPriority() > elements[swapIndex / 2].getPriority()){
-                swap(swapIndex, swapIndex/2);
+            if (elements[swapIndex].getPriority() > elements[swapIndex / 2].getPriority()) {
+                swap(swapIndex, swapIndex / 2);
             }
-             */
             i -= 2;
         }
         heap = elements;
