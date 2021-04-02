@@ -90,7 +90,7 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public double front() {
-        return 0.0;
+        return heap[1].getValue();
     }
 
     @Override
