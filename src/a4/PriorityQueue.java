@@ -125,7 +125,7 @@ public class PriorityQueue implements  Queue{
         }
         double currMin = heap[i + 1].getValue();
 
-        for (int j = 0; j < size; size++){
+        for (int j = 0; j < size; j++){
             if (!flag[j] && heap[j + 1].getValue() < currMin){
                 currMin = heap[j + 1].getValue();
                 minIndex = j;
