@@ -104,7 +104,7 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public boolean empty() {
-        return false;
+        return (heap[1] == null);
     }
 
     @Override
