@@ -160,11 +160,12 @@ public class PriorityQueue implements  Queue{
                     swapIndex = i - 1;
                 }
             }
-
+            /*
             if (elements[swapIndex].getPriority() > elements[swapIndex / 2].getPriority()) {
                 buildSwap(swapIndex, swapIndex / 2, elements);
             }
 
+             */
             i -= 2;
         }
         heap = elements;
