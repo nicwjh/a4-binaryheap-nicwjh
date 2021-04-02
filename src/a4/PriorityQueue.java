@@ -95,7 +95,11 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public int size() {
-        return 0;
+        int i = 0;
+        while (heap[i+1] != null){
+            i++;
+        }
+        return i;
     }
 
     @Override
