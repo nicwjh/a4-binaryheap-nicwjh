@@ -31,7 +31,7 @@ public class PriorityQueue implements  Queue{
         while (!heapStructure){
             int parentIndex = i/2;
             if (heap[i].getPriority() > heap[parentIndex].getPriority() && parentIndex != 0){
-                enqueue_swap(heap[i], heap[parentIndex]);
+                enqueue_swap(i, parentIndex);
                 i = parentIndex;
             }
             else if (heap[i].getPriority() < heap[parentIndex].getPriority() || parentIndex == 0){
@@ -39,10 +39,10 @@ public class PriorityQueue implements  Queue{
             }
         }
     }
-    private void enqueue_swap(Prioritized val1, Prioritized val2){
-        Prioritized temp = val1;
-        val1 = val2;
-        val2 = temp;
+    private void enqueue_swap(int val1, int val2){
+        Prioritized temp = heap[val1];
+        heap[val1] = heap[val2];
+        heap[val2] = temp;
     }
 
     @Override
