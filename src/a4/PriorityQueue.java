@@ -107,7 +107,7 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public double[] sort() {
-        boolean[] flag = new boolean[size];
+        boolean[] flag = new boolean[size + 1];
         double[] sortedValues = new double[size];
 
         for (int i = 0; i < size; i++) {
@@ -116,18 +116,14 @@ public class PriorityQueue implements  Queue{
         return sortedValues;
     }
     private double getMin(boolean[] flag){
-        int i = 0;
-        int minIndex = 0;
+        int minIndex = 1;
         boolean swapFlag = false;
 
-        while (flag[i]){
-            i++;
+        while (flag[minIndex]){
+            minIndex++;
         }
-        double currMin = heap[i + 1].getValue();
-
-        for (int j = 0; j < size; j++){
-            if (!flag[j] && heap[j + 1].getValue() < currMin){
-                currMin = heap[j + 1].getValue();
+        for (int j = 1; j <= size; j++){
+            if (!flag[j] && heap[j].getPriority() < heap[minIndex].getPriority()){
                 minIndex = j;
                 swapFlag = true;
             }
@@ -135,8 +131,7 @@ public class PriorityQueue implements  Queue{
         if (swapFlag) {
             flag[minIndex] = true;
         }
-
-        return currMin;
+        return heap[minIndex].getValue();
     }
 
     @Override
