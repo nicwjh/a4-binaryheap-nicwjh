@@ -31,7 +31,7 @@ public class PriorityQueue implements  Queue{
         while (!heapStructure){
             int parentIndex = i/2;
             if (heap[i].getPriority() > heap[parentIndex].getPriority() && parentIndex != 0){
-                enqueue_swap(i, parentIndex);
+                swap(i, parentIndex);
                 i = parentIndex;
             }
             else if (heap[i].getPriority() < heap[parentIndex].getPriority() || parentIndex == 0){
@@ -39,7 +39,7 @@ public class PriorityQueue implements  Queue{
             }
         }
     }
-    private void enqueue_swap(int val1, int val2){
+    private void swap(int val1, int val2){
         Prioritized temp = heap[val1];
         heap[val1] = heap[val2];
         heap[val2] = temp;
@@ -47,7 +47,45 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public double dequeue() {
-        return 0.0;
+        double value = heap[1].getValue();
+        int i = 1;
+        boolean heapStructure = false;
+
+        while (heap[i + 1] != null){
+            i++;
+        }
+        heap[1] = heap[i];
+        heap[i] = null;
+        i = 1;
+
+        while (!heapStructure){
+            int leftIndex = 2*i;
+            int rightIndex = 2*i + 1;
+
+            if (heap[leftIndex] != null && heap[rightIndex] != null){
+                if (heap[i].getPriority() > heap[leftIndex].getPriority() && heap[i].getPriority() > heap[rightIndex].getPriority()){
+                    heapStructure = true;
+                }
+                else {
+                    int swapIndex = heap[leftIndex].getPriority() > heap[rightIndex].getPriority() ? leftIndex : rightIndex;
+                    swap(i, swapIndex);
+                    i = swapIndex;
+                }
+            }
+            else if (heap[leftIndex] != null){
+                if (heap[i].getPriority() > heap[leftIndex].getPriority()){
+                    heapStructure = true;
+                }
+                else{
+                    swap(i, leftIndex);
+                    i = leftIndex;
+                }
+            }
+            else{
+                heapStructure = true;
+            }
+        }
+        return value;
     }
 
     @Override
