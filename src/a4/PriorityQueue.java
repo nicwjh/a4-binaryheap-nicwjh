@@ -141,15 +141,14 @@ public class PriorityQueue implements  Queue{
 
         while (i > 0) {
             int swapIndex = i;
-            if (i % 2 == 0) { //left leaf
-                if (i != elements.length - 1 && elements[i + 1].getPriority() > elements[i].getPriority()) {
-                    swapIndex = i + 1;
-                }
-
-            }
-            else { //right leaf
+            if (i % 2 == 0) { //r leaf
                 if (elements[i - 1].getPriority() > elements[i].getPriority()) {
                     swapIndex = i - 1;
+                }
+            }
+            else { //l leaf
+                if (i != elements.length - 1 && elements[i + 1].getPriority() > elements[i].getPriority()) {
+                    swapIndex = i + 1;
                 }
             }
             if (elements[swapIndex].getPriority() > elements[swapIndex / 2].getPriority()) {
