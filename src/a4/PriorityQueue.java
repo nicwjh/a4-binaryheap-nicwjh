@@ -30,11 +30,11 @@ public class PriorityQueue implements  Queue{
 
         while (!heapStructure){
             int parentIndex = i/2;
-            if (heap[i].getPriority() > heap[parentIndex].getPriority()){
+            if (heap[i].getPriority() > heap[parentIndex].getPriority() && parentIndex != 0){
                 enqueue_swap(heap[i], heap[parentIndex]);
                 i = parentIndex;
             }
-            else{
+            else if (heap[i].getPriority() < heap[parentIndex].getPriority() || parentIndex == 0){
                 heapStructure = true;
             }
         }
