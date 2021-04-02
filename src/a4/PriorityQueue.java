@@ -117,7 +117,8 @@ public class PriorityQueue implements  Queue{
     }
     private double getMin(boolean[] flag){
         int i = 0;
-        int minIndex = 0;
+        int minIndex;
+
         while (flag[i]){
             i++;
         }
@@ -130,6 +131,7 @@ public class PriorityQueue implements  Queue{
             }
         }
         flag[minIndex] = true;
+
         return currMin;
     }
 
