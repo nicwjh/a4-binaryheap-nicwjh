@@ -19,7 +19,9 @@ public class PriorityQueue implements  Queue{
     // fill in the methods below based on the descriptions in the Queue interface. Do NOT change the interface or any
     // of the method signatures
     @Override
-    public void enqueue(double value, double priority) { }
+    public void enqueue(double value, double priority) {
+        // test push
+    }
 
     @Override
     public double dequeue() {
