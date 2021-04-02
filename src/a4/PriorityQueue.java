@@ -117,7 +117,8 @@ public class PriorityQueue implements  Queue{
     }
     private double getMin(boolean[] flag){
         int i = 0;
-        int minIndex;
+        int minIndex = 0;
+        boolean swapFlag = false;
 
         while (flag[i]){
             i++;
@@ -128,9 +129,12 @@ public class PriorityQueue implements  Queue{
             if (!flag[j] && heap[j + 1].getValue() < currMin){
                 currMin = heap[j + 1].getValue();
                 minIndex = j;
+                swapFlag = true;
             }
         }
-        flag[minIndex] = true;
+        if (swapFlag) {
+            flag[minIndex] = true;
+        }
 
         return currMin;
     }
