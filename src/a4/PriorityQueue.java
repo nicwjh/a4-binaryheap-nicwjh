@@ -140,7 +140,8 @@ public class PriorityQueue implements  Queue{
         int i = elements.length;
 
         for (int j = 0; j < elements.length; j++){
-            heap[j + 1] = elements[j];
+            heap[j + 1] = new Prioritized(elements[j].getValue(), elements[j].getPriority());
+            size++;
         }
         while (i > 1) {
             int swapIndex = i;
