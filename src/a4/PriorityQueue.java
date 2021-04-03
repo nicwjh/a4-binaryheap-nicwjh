@@ -23,12 +23,13 @@ public class PriorityQueue implements  Queue{
         int i = 1;
         boolean heapStructure = false;
         Prioritized newObject = new Prioritized(value, priority);
+
         while (heap[i] != null){
             i++;
         }
-        heap[i] = newObject;
+        heap[i] = newObject; //insert object at leaf
 
-        while (!heapStructure){
+        while (!heapStructure){ //bubble up
             int parentIndex = i/2;
             if (heap[i].getPriority() > heap[parentIndex].getPriority() && parentIndex != 0){
                 swap(i, parentIndex);
@@ -40,6 +41,7 @@ public class PriorityQueue implements  Queue{
         }
         size++;
     }
+
     private void swap(int val1, int val2){
         Prioritized temp = heap[val1];
         heap[val1] = heap[val2];
@@ -55,15 +57,15 @@ public class PriorityQueue implements  Queue{
         while (heap[i + 1] != null){
             i++;
         }
-        heap[1] = heap[i];
+
+        heap[1] = heap[i]; //insert last element at root
         heap[i] = null;
         i = 1;
 
-        while (!heapStructure){
+        while (!heapStructure){ //bubble down
             int leftIndex = 2*i;
             int rightIndex = 2*i + 1;
-
-            if (heap[leftIndex] != null && heap[rightIndex] != null){
+            if (heap[leftIndex] != null && heap[rightIndex] != null){ //left and right children
                 if (heap[i].getPriority() > heap[leftIndex].getPriority() && heap[i].getPriority() > heap[rightIndex].getPriority()){
                     heapStructure = true;
                 }
@@ -73,7 +75,7 @@ public class PriorityQueue implements  Queue{
                     i = swapIndex;
                 }
             }
-            else if (heap[leftIndex] != null){
+            else if (heap[leftIndex] != null){ //only left child
                 if (heap[i].getPriority() > heap[leftIndex].getPriority()){
                     heapStructure = true;
                 }
@@ -82,10 +84,11 @@ public class PriorityQueue implements  Queue{
                     i = leftIndex;
                 }
             }
-            else{
+            else{ //bubbled down to leaf
                 heapStructure = true;
             }
         }
+
         size--;
         return value;
     }
@@ -113,8 +116,10 @@ public class PriorityQueue implements  Queue{
         for (int i = 0; i < size; i++) {
             sortedValues[i] = getMin(flag);
         }
+
         return sortedValues;
     }
+
     private double getMin(boolean[] flag){
         int minIndex = 1;
         boolean swapFlag = false;
@@ -129,6 +134,7 @@ public class PriorityQueue implements  Queue{
                 swapFlag = true;
             }
         }
+
         if (swapFlag) {
             flag[minIndex] = true;
         }
@@ -143,8 +149,10 @@ public class PriorityQueue implements  Queue{
             heap[j + 1] = elements[j];
             size++;
         }
+
         while (i > 1) {
             int swapIndex = i;
+
             if (i % 2 == 0) { // l child
                 if (heap[i + 1] != null && heap[i + 1].getPriority() > heap[i].getPriority()) {
                     swapIndex = i + 1;
@@ -155,16 +163,18 @@ public class PriorityQueue implements  Queue{
                     swapIndex = i - 1;
                 }
             }
+
             if (heap[swapIndex].getPriority() > heap[swapIndex / 2].getPriority()) {
                 swap(swapIndex, swapIndex/2);
             }
             i -= 2;
 
-            if (i <= 1 && !isHeapStructure()){
+            if (i <= 1 && !isHeapStructure()){ // bubble down to leaf if needed
                 i = elements.length;
             }
         }
     }
+
     private boolean isHeapStructure(){
         boolean flag = true;
 
@@ -181,6 +191,7 @@ public class PriorityQueue implements  Queue{
                 }
             }
         }
+
         return flag;
     }
 
