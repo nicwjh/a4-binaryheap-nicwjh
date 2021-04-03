@@ -147,7 +147,7 @@ public class PriorityQueue implements  Queue{
                 }
             }
             else { //l leaf
-                if (i != elements.length - 1 && elements[i + 1].getPriority() > elements[i].getPriority()) {
+                if (elements[i + 1].getPriority() > elements[i].getPriority()) {
                     swapIndex = i + 1;
                 }
             }
