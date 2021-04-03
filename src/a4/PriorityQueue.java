@@ -21,22 +21,23 @@ public class PriorityQueue implements  Queue{
     @Override
     public void enqueue(double value, double priority) {
         int i = 1;
-        boolean heapStructure = false;
+        boolean heapOrder = false;
         Prioritized newObject = new Prioritized(value, priority);
 
         while (heap[i] != null){
             i++;
         }
+
         heap[i] = newObject; //insert object at leaf
 
-        while (!heapStructure){ //bubble up
+        while (!heapOrder){ //bubble up
             int parentIndex = i/2;
             if (heap[i].getPriority() > heap[parentIndex].getPriority() && parentIndex != 0){
                 swap(i, parentIndex);
                 i = parentIndex;
             }
             else if (heap[i].getPriority() < heap[parentIndex].getPriority() || parentIndex == 0){
-                heapStructure = true;
+                heapOrder = true;
             }
         }
         size++;
@@ -52,7 +53,7 @@ public class PriorityQueue implements  Queue{
     public double dequeue() {
         double value = heap[1].getValue();
         int i = 1;
-        boolean heapStructure = false;
+        boolean heapOrder = false;
 
         while (heap[i + 1] != null){
             i++;
@@ -62,12 +63,12 @@ public class PriorityQueue implements  Queue{
         heap[i] = null;
         i = 1;
 
-        while (!heapStructure){ //bubble down
+        while (!heapOrder){ //bubble down
             int leftIndex = 2*i;
             int rightIndex = 2*i + 1;
             if (heap[leftIndex] != null && heap[rightIndex] != null){ //left and right children
                 if (heap[i].getPriority() > heap[leftIndex].getPriority() && heap[i].getPriority() > heap[rightIndex].getPriority()){
-                    heapStructure = true;
+                    heapOrder = true;
                 }
                 else {
                     int swapIndex = heap[leftIndex].getPriority() > heap[rightIndex].getPriority() ? leftIndex : rightIndex;
@@ -77,7 +78,7 @@ public class PriorityQueue implements  Queue{
             }
             else if (heap[leftIndex] != null){ //only left child
                 if (heap[i].getPriority() > heap[leftIndex].getPriority()){
-                    heapStructure = true;
+                    heapOrder = true;
                 }
                 else{
                     swap(i, leftIndex);
@@ -85,10 +86,9 @@ public class PriorityQueue implements  Queue{
                 }
             }
             else{ //bubbled down to leaf
-                heapStructure = true;
+                heapOrder = true;
             }
         }
-
         size--;
         return value;
     }
@@ -169,13 +169,13 @@ public class PriorityQueue implements  Queue{
             }
             i -= 2;
 
-            if (i <= 1 && !isHeapStructure()){ // bubble down to leaf if needed
+            if (i <= 1 && !isHeapOrder()){ // bubble down to leaf if needed
                 i = elements.length;
             }
         }
     }
 
-    private boolean isHeapStructure(){
+    private boolean isHeapOrder(){
         boolean flag = true;
 
         for (int i = 1; i <= size; i++){
@@ -191,7 +191,6 @@ public class PriorityQueue implements  Queue{
                 }
             }
         }
-
         return flag;
     }
 
