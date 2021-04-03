@@ -137,6 +137,30 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public void build(Prioritized[] elements) {
+        int i = elements.length;
+
+        for (int j = 0; j < elements.length; j++){
+            heap[j + 1] = elements[j];
+        }
+        while (i > 1) {
+            int swapIndex = i;
+            if (i % 2 == 0) { // l leaf
+                if (heap[i + 1] != null && heap[i + 1].getPriority() > heap[i].getPriority()) {
+                    swapIndex = i + 1;
+                }
+            }
+            else { //r leaf
+                if (heap[i - 1].getPriority() > heap[i].getPriority()) {
+                    swapIndex = i - 1;
+                }
+            }
+            if (heap[swapIndex].getPriority() > heap[swapIndex / 2].getPriority()) {
+                swap(swapIndex, swapIndex/2);
+            }
+            i -= 2;
+        }
+
+        /*
         int i = elements.length - 1;
 
         while (i >= 1) {
@@ -159,6 +183,9 @@ public class PriorityQueue implements  Queue{
         for (int j = 0; j < elements.length; j++){
             heap[j + 1] = elements[j];
         }
+
+
+         */
     }
     private void buildSwap(int index1, int index2, Prioritized[] array1){
         Prioritized temp = array1[index1];
