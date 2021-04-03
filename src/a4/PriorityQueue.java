@@ -140,17 +140,17 @@ public class PriorityQueue implements  Queue{
         int i = elements.length;
 
         for (int j = 0; j < elements.length; j++){
-            heap[j + 1] = new Prioritized(elements[j].getValue(), elements[j].getPriority());
+            heap[j + 1] = elements[j];
             size++;
         }
         while (i > 1) {
             int swapIndex = i;
-            if (i % 2 == 0) { // l leaf
+            if (i % 2 == 0) { // l child
                 if (heap[i + 1] != null && heap[i + 1].getPriority() > heap[i].getPriority()) {
                     swapIndex = i + 1;
                 }
             }
-            else { //r leaf
+            else { //r child
                 if (heap[i - 1].getPriority() > heap[i].getPriority()) {
                     swapIndex = i - 1;
                 }
@@ -159,41 +159,30 @@ public class PriorityQueue implements  Queue{
                 swap(swapIndex, swapIndex/2);
             }
             i -= 2;
+
+            if (i <= 1 && !isHeapStructure()){
+                i = elements.length;
+            }
         }
+    }
+    private boolean isHeapStructure(){
+        boolean flag = true;
 
-        /*
-        int i = elements.length - 1;
-
-        while (i >= 1) {
-            int swapIndex = i;
-            if (i % 2 == 0) { //r leaf
-                if (elements[i - 1].getPriority() > elements[i].getPriority()) {
-                    swapIndex = i - 1;
+        for (int i = 1; i <= size; i++){
+            if (heap[2 * i] == null && heap[2 * i + 1] == null){
+                break;
+            }
+            else {
+                if (heap[2 * i] != null && heap[i].getPriority() < heap[2 * i].getPriority()) {
+                    flag = false;
+                }
+                if (heap[2 * i + 1] != null && heap[i].getPriority() < heap[2 * i + 1].getPriority()) {
+                    flag = false;
                 }
             }
-            else { //l leaf
-                if (i < elements.length - 1 && elements[i + 1].getPriority() > elements[i].getPriority()) {
-                    swapIndex = i + 1;
-                }
-            }
-            if (elements[swapIndex].getPriority() > elements[swapIndex / 2].getPriority()) {
-                buildSwap(swapIndex, swapIndex / 2, elements);
-            }
-            i -= 2;
         }
-        for (int j = 0; j < elements.length; j++){
-            heap[j + 1] = elements[j];
-        }
-
-
-         */
+        return flag;
     }
-    private void buildSwap(int index1, int index2, Prioritized[] array1){
-        Prioritized temp = array1[index1];
-        array1[index1] = array1[index2];
-        array1[index2] = temp;
-    }
-
 
     // do not change
     public Prioritized[] getHeap() {
