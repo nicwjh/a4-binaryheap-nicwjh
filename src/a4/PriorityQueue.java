@@ -137,10 +137,7 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public void build(Prioritized[] elements) {
-        int i = 0;
-        while (elements[i+1] != null){
-            i++;
-        }
+        int i = elements.length - 1;
 
         while (i > 1) {
             int swapIndex = i;
@@ -157,7 +154,6 @@ public class PriorityQueue implements  Queue{
             if (elements[swapIndex].getPriority() > elements[swapIndex / 2].getPriority()) {
                 buildSwap(swapIndex, swapIndex / 2, elements);
             }
-
             i -= 2;
         }
         heap = elements;
