@@ -137,7 +137,10 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public void build(Prioritized[] elements) {
-        int i = elements.length - 1;
+        int i = 0;
+        while (elements[i+1] != null){
+            i++;
+        }
 
         while (i > 1) {
             int swapIndex = i;
