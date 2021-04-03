@@ -137,9 +137,9 @@ public class PriorityQueue implements  Queue{
 
     @Override
     public void build(Prioritized[] elements) {
-        int i = elements.length;
+        int i = elements.length - 1;
 
-        while (i > 1) {
+        while (i >= 1) {
             int swapIndex = i;
             if (i % 2 == 0) { //r leaf
                 if (elements[i - 1].getPriority() > elements[i].getPriority()) {
@@ -147,7 +147,7 @@ public class PriorityQueue implements  Queue{
                 }
             }
             else { //l leaf
-                if (i != elements.length && elements[i + 1].getPriority() > elements[i].getPriority()) {
+                if (i != elements.length - 1 && elements[i + 1].getPriority() > elements[i].getPriority()) {
                     swapIndex = i + 1;
                 }
             }
