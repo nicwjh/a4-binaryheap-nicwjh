@@ -157,7 +157,7 @@ public class PriorityQueue implements  Queue{
             i -= 2;
         }
         for (int j = 0; j < elements.length; j++){
-            heap[j] = elements[j];
+            heap[j + 1] = elements[j];
         }
     }
     private void buildSwap(int index1, int index2, Prioritized[] array1){
